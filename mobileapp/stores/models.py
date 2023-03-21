@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import JSONField
+from django.utils import timezone
 from datetime import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
 from users.models import User
@@ -38,7 +39,7 @@ class Item(models.Model):
     is_available = models.BooleanField()
     vegan = models.BooleanField()
     store = models.ForeignKey(Store,on_delete=models.CASCADE,null=True,blank=True)
-    quantity = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
 
 
     def __str__(self):
@@ -55,7 +56,7 @@ class Rating(models.Model):
 
     rate = models.IntegerField(choices=rates)
     comment = models.TextField(max_length=120,null=True,blank=True)
-    published_date = models.DateTimeField(default=datetime.now())
+    published_date = models.DateTimeField(default=timezone.now)
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
     User = models.ForeignKey(User,on_delete=models.CASCADE)
 

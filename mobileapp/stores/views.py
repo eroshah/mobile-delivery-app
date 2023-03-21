@@ -14,6 +14,7 @@ class StoreView(APIView):
         objects = models.Store.objects.all()
         serializer = serializers.GetStoreSerializer(objects,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
+
     def post(self,request):
         serializer = serializers.GetStoreSerializer(data=request.data)
         if serializer.is_valid():
@@ -27,6 +28,7 @@ class ItemView(APIView):
         objects = models.Item.objects.all()
         serializer = serializers.GetItemSerializer(objects,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
+
     def post(self,request):
         serializer = serializers.GetItemSerializer(data=request.data)
         if serializer.is_valid():
